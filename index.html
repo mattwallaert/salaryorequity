@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="equity.css">
+    <link rel="stylesheet" type="text/css" href="tooltipster.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-85598404-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="jquery.tooltipster.min.js"></script>
+    <script src="AnimateNumber.js"></script>
+
+</head>
+<br>
+<h1>{Salary Or Equity}</h1>
+<p class="midi tooltip" title="All the information needed is available online or you can ask for it.">Break down your startup's offer letter</p>
+<div class="divider"></div>
+<br>
+<h3>You can think of your equity as worth <span id="salary" class="tooltip"
+                                              title="Walk through the form below, and we can figure this out together.">$______</span> per year in
+    salary.
+
+</h3>
+<br>
+
+<div id="container">
+    <div id="left">
+        <h2 id="initialFunding">{1. INITIAL FUNDING}</h2>
+        <div class="facts">
+            <p>
+            The company has taken funding equal to $<input class="tooltip"
+                                                          title="How much has been raised so far?"
+                                                          type="text" min="0"
+                                                          id="funding"
+                                                            >
+            at a $<input title="What is the company's current post-money valuation?" class="tooltip" type="text" min="0"
+                id="valuation">
+            post-money valuation.</p>
+            <p>This means they sold <span id="percentSold"></span><b>%</b> of the company for <span
+                id="companyFunding"></span> and
+            implies that the total value of the company is <span id="totalValue"></span>.
+            </p>
+            <p>They are offering you  <input title="How many shares are they offering you?" class="tooltip"
+                                          type="text" min="0"  id="offeredShares"> shares out of the
+            <input title="How many shares are there total?" class="tooltip" type="input" min="0"
+                   
+                   id="outstandingShares"> shares they have issued.
+            </p>
+            <p>
+            This means you would own	<b><span class="percentOwned"></span>%</b>	which is worth	<span
+                id="worth"></span>	at the
+            current post-money valuation.
+            </p>
+            <center><span id="nextCenter">NEXT STEP</span></center>
+        </div>
+        <div class="chartoid">
+            <div id="ownership"></div>
+        </div>
+    </div>
+
+
+    <div id="right">
+        <h2>{3. RISK AND PAYOFF}</h2>
+        <p>
+        Now there is always a chance a startup will fail, so we apply a risk factor to it.
+        </p>
+        <p>
+        Because your portion is worth <span
+            class="adjustedWorth"></span> only if the company sells, you have to decide how likely that
+        is.
+        </p>
+        <p>
+        If, for example, you believe the company has a <input type="text" min="0" 
+                                                              id="sellingChance"
+                                                              title="What's the likelihood of the company selling?
+               ">%
+        chance of
+        selling
+        for
+        the
+        valuation of <span class="newValuation"></span>, then the expected value of your equity is	<span id="expectedEquity"></span>.
+        </p>
+        <p>    
+        You also won't get all your equity at once; usually there is a vesting period, meaning you get some amount for each month or year that you work.
+        So let's say your   <span class="percentRevaluated"></span><b>%</b> share is paid out over  <input
+                title="What is length of payout period in years?" class="tooltip" type="text" min="0"
+                id="timePayout">
+        years.
+        </p>
+               
+    </div>
+
+
+    <div id="center">
+        <h2>{2. ADDITIONAL FUNDING}</h2>
+        <div id="ownershipRecomputed"></div>
+        <div class="facts">
+        <p>
+            Over time, you may get diluted.  This happens because the company has to take in more money in order to get to a place where it can sell itself (hence A Round, B Round, etc.)  This can actually be a good thing, because it means the company is growing and increasing in value.
+            </p>
+            <p>
+            So imagine they took in another	$<input type="text" min="0" id="moreFunding"
+                                                      title="How much more money do you think the company will need before it exits?" class="tooltip">
+            at a $
+            <input type="text" min="0" 
+                   title="What will the post-money valuation be when the company raises more money?" class="tooltip"
+                   id="secondValuation">  post-money valuation.
+            </p>
+            <p>
+            Because they would issue new shares, your	<span class="percentOwned"></span><b>%</b> of the company is now only	<span
+                class="percentRevaluated"></span><b>%</b>.
+            </p>
+            <p>
+            But because the company is now valued at <span class="newValuation"></span> 	your portion
+            is worth <span class="adjustedWorth"></span>.
+            <br></p>
+        </div>
+        <center><span id="nextRight">NEXT STEP</span></center>
+
+
+    </div>
+
+
+
+    </div>
+</div>
+<br>
+
+ <center>
+    <div id="payoff">
+                 <h3>That means you can think of your equity as worth <span id="salary2">$______</span> per year in
+            salary
+            .</h3>
+    </div>
+
+</center>
+<br>
+
+
+<div id="tooltipD3" class="hidden">
+    <div id="value"></div>
+</div>
+
+<p class="midi">a <b>work worth doing</b> project by <a href="https://twitter.com/NataliaRdzNunez" target="_blank">natalia rodriguez</a> and <a href="https://twitter.com/mattwallaert" target="_blank">matt wallaert</a></p>
+<p class="disclaimer"> * This tool is not a crystal ball; your equity could eventually be worth a lot more or a lot less.  But equity does have a potential value and while many startups fail, you join a startup because you believe it will succeed and because your efforts make that success more likely.</p>
+
+<script src="InitialEquity.js"></script>
+<script src="RiskChart.js"></script>
+<script src="EquityLogic.js"></script>
+
+</body>
+</html>
